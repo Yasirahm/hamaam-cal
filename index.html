@@ -1,159 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- SEO META TAGS -->
   <!-- BASIC SEO -->
-<meta name="title" content="Yasir Hamid – AH-Hamaam Construction Calculator">
-<meta name="description" content="Official AH-Hamaam Construction Calculator by Yasir Hamid. Calculate hamaam stones, inches, square feet, gazz, and total cost easily. Trusted calculator by Yasir Hamid.">
-
-<meta name="keywords" content="
-Yasir Hamid,
-Yasir Hamid Calculator,
-Yasir Calculator,
-Hamaam Calculator,
-AH-Hamaam Calculator,
-Hamaam Stone Calculator,
-Yasir Hamid Hamaam,
-Yasir Cal,
-Yasir Construction Calculator,
-Hamaam Hisaab,
-Stone Area Calculator,
-Gazz Calculator,
-AH-Hamaam Construction
-">
-
-<meta name="author" content="Yasir Hamid">
-<meta name="robots" content="index, follow">
-
-<!-- CANONICAL (VERY IMPORTANT) -->
-<link rel="canonical" href="https://hamaamcal.netlify.app/">
+  <meta name="title" content="Yasir Hamid – AH-Hamaam Construction Calculator">
+  <meta name="description" content="Official AH-Hamaam Construction Calculator by Yasir Hamid. Calculate hamaam stones, inches, square feet, gazz, and total cost easily.">
+  <meta name="keywords" content="Yasir Hamid, Yasir Calculator, Hamaam Calculator, AH-Hamaam Calculator, Gazz Calculator">
+  <meta name="author" content="Yasir Hamid">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>AH-Hamaam Construction Calculator</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
 
   <style>
-    *{ box-sizing:border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    body{
+    body {
+      margin: 0;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
-      background:#000;
-      color:#fff;
-      margin:0;
-      padding:20px;
+      background: radial-gradient(circle at top, #0f172a, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #fff;
     }
 
-    .wrapper{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
+    .wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
-    .container{
-      width:100%;
-      max-width:380px;
-      background:#020617;
-      padding:20px;
-      border-radius:12px;
-      box-shadow:0 0 25px rgba(0,0,0,0.8);
+    .container {
+      width: 100%;
+      max-width: 380px;
+      background: linear-gradient(180deg, #020617, #020617);
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
     }
 
-    h2{
-      text-align:center;
-      color:#e5c9a6;
-      margin-bottom:12px;
+    h2 {
+      text-align: center;
+      color: #e5c9a6;
+      margin-bottom: 6px;
     }
 
-    input{
-      width:100%;
-      padding:12px;
-      font-size:16px;
-      border:none;
-      border-radius:6px;
-      background:#000;
-      color:#fff;
-      margin-bottom:8px;
+    .dev-mini {
+      font-size: 8px;
+      text-align: center;
+      margin-bottom: 14px;
     }
 
-    button{
-      width:100%;
-      padding:10px;
-      margin-top:6px;
-      font-size:15px;
-      border:none;
-      border-radius:6px;
-      background:#e5c9a6;
-      font-weight:bold;
-      cursor:pointer;
+    .dev-mini a {
+      color: #e5c9a6;
+      text-decoration: none;
     }
 
-    .box{ text-align:center; margin-top:8px; }
-    .result{ color:#22c55e; font-weight:bold; }
-
-    #stonesBox{
-      margin-top:10px;
-      font-size:14px;
-      color:#cbd5f5;
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: #000;
+      color: #fff;
+      margin-bottom: 10px;
     }
 
-    footer{
-      margin-top:25px;
-      text-align:center;
-      font-size:13px;
-      color:#9ca3af;
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: none;
+      background: #6b4f2a;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
     }
 
-    footer a{
-      color:#e5c9a6;
-      font-weight:bold;
-      text-decoration:none;
+    .box {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .result {
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    #stonesBox {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .print-btn {
+      margin-top: 14px;
+      background: #6b4f2a;
+    }
+
+    footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    footer a {
+      color: #e5c9a6;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     /* ===== PRINT ===== */
-    @media print{
-      body{ background:#fff; color:#000; }
-      button, input{ display:none; }
-      .screen-footer{ display:none; }
-      .print-footer{ display:block; }
-      #stonesBox{ color:#000; }
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+      input, button, footer {
+        display: none;
+      }
     }
-
-    .print-footer{ display:none; }
   </style>
 </head>
 
 <body>
 
 <div class="wrapper">
-
   <div class="container" id="printArea">
 
-    <!-- BILL TITLE INPUT -->
     <input
       type="text"
       id="billTitleInput"
-      placeholder="Enter Bill Title"
       value="AH-Hamaam Construction"
+      placeholder="Enter Bill Title"
       oninput="updateBillTitle()"
     >
 
     <h2 id="billTitle">AH-Hamaam Construction</h2>
 
-    <h1 id="billTitle" style="font-size:8px; font-weight:normal; text-align:center;">
-  Developed by
-  <a href="https://yasirhamid.netlify.app/" style="font-size:8px;">
-    Yasir Hamid
-  </a>
-</h1>
+    <div class="dev-mini">
+      Developed by
+      <a href="https://yasirhamid.netlify.app/">Yasir Hamid</a>
+    </div>
 
-
-    <input type="text" id="rawInput"
+    <input
+      type="text"
+      id="rawInput"
       placeholder="Enter numbers only (in inches)"
-      oninput="handleInput(this)">
+      oninput="handleInput(this)"
+    >
 
     <div class="box" id="expression"></div>
-
-    <!-- STONES LIST -->
     <div id="stonesBox"></div>
 
     <button onclick="calculateInches()">Calculate Inches</button>
@@ -170,71 +178,27 @@ AH-Hamaam Construction
     <div class="box result" id="amountResult"></div>
 
     <div class="box" id="dateBox"></div>
-  </div>
 
-  <div>
-    <button onclick="printHisaab()">Print Hisaab</button>
-  </div>
+    <button class="print-btn" onclick="printHisaab()">Print Hisaab</button>
 
+    <footer>
+      Better full bill available at
+      <a href="https://hamaamcal.netlify.app/" target="_blank">
+        hamaamcal.netlify.app
+      </a>
+    </footer>
+
+  </div>
 </div>
-
-<footer>
-  <!-- Screen Footer -->
-  <div class="screen-footer">
-    <p>
-      Developed by
-      <a href="https://your-website-link.com" target="_blank">
-        Yasir Hamid
-      </a>
-    </p>
-    <p>
-      Portfolio:
-      <a href="https://yasirhamid.netlify.app" target="_blank">
-        YasirHamid.com
-      </a>
-      |
-      LinkedIn:
-      <a href="https://www.linkedin.com/in/yasirhamidrather?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-        Yasir Hamid on linkedin 
-      </a>
-    </p>
-  </div>
-  <div class="screen-footer">
-    <p>
-      Book your hamaam now at
-      <a href="https://ahhamaam1.netlify.app/" target="_blank">
-        AH-Hamaam.com
-      </a>
-      </p>
-  </div>
-  <div class="screen-footer">
-    <p>
-      download AH-Hamaam calculator App at
-      <a href="https://hamaamcalapk.netlify.app/" target="_blank">
-        AH-Hamaamcalapk.com
-      </a>
-      </p>
-  </div>
-
-  <!-- Print Footer -->
-  <div class="print-footer">
-    Developed by
-    <a href="https://yasirhamid.netlify.app" target="_blank">
-      Yasir Hamid
-    </a>
-  </div>
-</footer>
 
 <script>
 let totalInch=0,totalFeet=0,totalGazz=0;
 
-/* UPDATE BILL TITLE */
 function updateBillTitle(){
   const title=document.getElementById("billTitleInput").value || "AH-Hamaam Construction";
   document.getElementById("billTitle").innerText=title;
 }
 
-/* AUTO SPACE */
 function handleInput(el){
   let clean=el.value.replace(/\D/g,'');
   let grouped=clean.match(/.{1,4}/g);
@@ -242,10 +206,8 @@ function handleInput(el){
   formatExpression(clean);
 }
 
-/* SHOW STONES */
 function formatExpression(clean){
   let exp="", stones="", i=0, c=0;
-
   while(i+3<clean.length){
     let w=clean.substring(i,i+2);
     let b=clean.substring(i+2,i+4);
@@ -254,13 +216,11 @@ function formatExpression(clean){
     stones+=`<div>Stone ${c}: ${w} × ${b}</div>`;
     i+=4;
   }
-
   document.getElementById("expression").innerText=exp.replace(/\| $/,'');
   document.getElementById("stonesBox").innerHTML=
     c?`<b>Total Stones: ${c}</b><br>${stones}`:'';
 }
 
-/* CALCULATIONS */
 function calculateInches(){
   let input=document.getElementById("rawInput").value.replace(/\D/g,'');
   totalInch=0;
@@ -287,7 +247,6 @@ function calculateAmount(){
     "Total Amount : ₹ "+(totalGazz*rate).toFixed(2);
 }
 
-/* PRINT */
 function printHisaab(){
   document.getElementById("dateBox").innerText=
     "Date : "+new Date().toLocaleDateString();
