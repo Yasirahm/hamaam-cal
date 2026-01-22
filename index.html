@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- SEO META TAGS -->
+  <meta name="description" content="AH-Hamaam Construction Calculator helps calculate hamaam stone area easily using inches, square feet and gazz. Simple, accurate hisaab for hamaam, marble and stone construction work.">
+  <meta name="keywords" content="ah hamaam, ah-hamaam construction, hamaam calculator, hamaam stone calculator, gazz calculator">
+  <meta name="author" content="Yasir Hamid">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta charset="UTF-8">
+  <title>AH-Hamaam Construction Calculator</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+
+  <style>
+    *{ box-sizing:border-box; }
+
+    body{
+      font-family: Arial, sans-serif;
+      background:#000;
+      color:#fff;
+      margin:0;
+      padding:20px;
+    }
+
+    .wrapper{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .container{
+      width:100%;
+      max-width:380px;
+      background:#020617;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 0 25px rgba(0,0,0,0.8);
+    }
+
+    h2{
+      text-align:center;
+      color:#e5c9a6;
+      margin-bottom:12px;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      font-size:16px;
+      border:none;
+      border-radius:6px;
+      background:#000;
+      color:#fff;
+      margin-bottom:8px;
+    }
+
+    button{
+      width:100%;
+      padding:10px;
+      margin-top:6px;
+      font-size:15px;
+      border:none;
+      border-radius:6px;
+      background:#e5c9a6;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .box{ text-align:center; margin-top:8px; }
+    .result{ color:#22c55e; font-weight:bold; }
+
+    #stonesBox{
+      margin-top:10px;
+      font-size:14px;
+      color:#cbd5f5;
+    }
+
+    footer{
+      margin-top:25px;
+      text-align:center;
+      font-size:13px;
+      color:#9ca3af;
+    }
+
+    footer a{
+      color:#e5c9a6;
+      font-weight:bold;
+      text-decoration:none;
+    }
+
+    /* ===== PRINT ===== */
+    @media print{
+      body{ background:#fff; color:#000; }
+      button, input{ display:none; }
+      .screen-footer{ display:none; }
+      .print-footer{ display:block; }
+      #stonesBox{ color:#000; }
+    }
+
+    .print-footer{ display:none; }
+  </style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <div class="container" id="printArea">
+
+    <!-- BILL TITLE INPUT -->
+    <input
+      type="text"
+      id="billTitleInput"
+      placeholder="Enter Bill Title"
+      value="AH-Hamaam Construction"
+      oninput="updateBillTitle()"
+    >
+
+    <h2 id="billTitle">AH-Hamaam Construction</h2>
+
+    <h1 id="billTitle" style="font-size:8px; font-weight:normal; text-align:center;">
+  Developed by
+  <a href="https://yasirhamid.netlify.app/" style="font-size:8px;">
+    Yasir Hamid
+  </a>
+</h1>
+
+
+    <input type="text" id="rawInput"
+      placeholder="Enter numbers only (in inches)"
+      oninput="handleInput(this)">
+
+    <div class="box" id="expression"></div>
+
+    <!-- STONES LIST -->
+    <div id="stonesBox"></div>
+
+    <button onclick="calculateInches()">Calculate Inches</button>
+    <div class="box result" id="inchResult"></div>
+
+    <button onclick="convertToFeet()">Convert to Sq Feet</button>
+    <div class="box result" id="feetResult"></div>
+
+    <button onclick="convertToGazz()">Convert to Gazz</button>
+    <div class="box result" id="gazzResult"></div>
+
+    <input type="number" id="rate" placeholder="Rate per Gazz (optional)">
+    <button onclick="calculateAmount()">Calculate Amount</button>
+    <div class="box result" id="amountResult"></div>
+
+    <div class="box" id="dateBox"></div>
+  </div>
+
+  <div>
+    <button onclick="printHisaab()">Print Hisaab</button>
+  </div>
+
+</div>
+
+<footer>
+  <!-- Screen Footer -->
+  <div class="screen-footer">
+    <p>
+      Developed by
+      <a href="https://your-website-link.com" target="_blank">
+        Yasir Hamid
+      </a>
+    </p>
+    <p>
+      Portfolio:
+      <a href="https://yasirhamid.netlify.app" target="_blank">
+        YasirHamid.com
+      </a>
+      |
+      LinkedIn:
+      <a href="https://www.linkedin.com/in/yasirhamidrather?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+        Yasir Hamid on linkedin 
+      </a>
+    </p>
+  </div>
+  <div class="screen-footer">
+    <p>
+      Book your hamaam now at
+      <a href="https://ahhamaam1.netlify.app/" target="_blank">
+        AH-Hamaam.com
+      </a>
+      </p>
+  </div>
+  <div class="screen-footer">
+    <p>
+      download AH-Hamaam calculator App at
+      <a href="https://hamaamcalapk.netlify.app/" target="_blank">
+        AH-Hamaamcalapk.com
+      </a>
+      </p>
+  </div>
+
+  <!-- Print Footer -->
+  <div class="print-footer">
+    Developed by
+    <a href="https://yasirhamid.netlify.app" target="_blank">
+      Yasir Hamid
+    </a>
+  </div>
+</footer>
+
+<script>
+let totalInch=0,totalFeet=0,totalGazz=0;
+
+/* UPDATE BILL TITLE */
+function updateBillTitle(){
+  const title=document.getElementById("billTitleInput").value || "AH-Hamaam Construction";
+  document.getElementById("billTitle").innerText=title;
+}
+
+/* AUTO SPACE */
+function handleInput(el){
+  let clean=el.value.replace(/\D/g,'');
+  let grouped=clean.match(/.{1,4}/g);
+  el.value=grouped?grouped.join(' '):'';
+  formatExpression(clean);
+}
+
+/* SHOW STONES */
+function formatExpression(clean){
+  let exp="", stones="", i=0, c=0;
+
+  while(i+3<clean.length){
+    let w=clean.substring(i,i+2);
+    let b=clean.substring(i+2,i+4);
+    exp+=w+" × "+b+" | ";
+    c++;
+    stones+=`<div>Stone ${c}: ${w} × ${b}</div>`;
+    i+=4;
+  }
+
+  document.getElementById("expression").innerText=exp.replace(/\| $/,'');
+  document.getElementById("stonesBox").innerHTML=
+    c?`<b>Total Stones: ${c}</b><br>${stones}`:'';
+}
+
+/* CALCULATIONS */
+function calculateInches(){
+  let input=document.getElementById("rawInput").value.replace(/\D/g,'');
+  totalInch=0;
+  for(let i=0;i+3<input.length;i+=4){
+    totalInch+=Number(input.substring(i,i+2))*Number(input.substring(i+2,i+4));
+  }
+  document.getElementById("inchResult").innerText="Total Inch² : "+totalInch;
+}
+
+function convertToFeet(){
+  totalFeet=(totalInch/144).toFixed(2);
+  document.getElementById("feetResult").innerText="Square Feet : "+totalFeet;
+}
+
+function convertToGazz(){
+  totalGazz=(totalFeet/9).toFixed(2);
+  document.getElementById("gazzResult").innerText="Total Gazz : "+totalGazz;
+}
+
+function calculateAmount(){
+  let rate=Number(document.getElementById("rate").value);
+  if(!rate) return alert("Enter rate per gazz");
+  document.getElementById("amountResult").innerText=
+    "Total Amount : ₹ "+(totalGazz*rate).toFixed(2);
+}
+
+/* PRINT */
+function printHisaab(){
+  document.getElementById("dateBox").innerText=
+    "Date : "+new Date().toLocaleDateString();
+  window.print();
+}
+</script>
+
+</body>
+</html>
